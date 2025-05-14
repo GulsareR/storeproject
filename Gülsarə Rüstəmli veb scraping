@@ -1,0 +1,24 @@
+import requests from bs4 import BeautifulSoup import pandas as pd
+
+Məhsul siyahısı səhifəsinin URL-si
+
+url = 'https://www.irshad.az/az/products'
+
+HTTP sorğusu göndərilir
+
+headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' } response = requests.get(url, headers=headers)
+
+HTML məzmunu analiz edilir
+
+soup = BeautifulSoup(response.text, 'html.parser')
+
+Məhsul məlumatları toplanır
+
+products = [] for item in soup.find_all('div', class_='product-item'): name = item.find('h2', class_='product-title').text.strip() price = item.find('span', class_='price').text.strip() image_url = item.find('img')['src'] products.append({ 'Məhsul Adı': name, 'Qiymət': price, 'Şəkil URL': image_url })
+
+Məlumatlar Excel faylına yazılır
+
+df = pd.DataFrame(products) df.to_excel('irshad_mehsullar.xlsx', index=False)
+
+print('Məlumatlar irshad_mehsullar.xlsx faylına yazıldı.')
+

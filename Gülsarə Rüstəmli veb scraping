@@ -2,7 +2,7 @@ import requests from bs4 import BeautifulSoup import pandas as pd
 
 Məhsul siyahısı səhifəsinin URL-si
 
-url = 'https://www.irshad.az/az/products'
+url = 'https://irshad.az/telefon-ve-aksesuarlar/mobil-telefonlar/apple' 
 
 HTTP sorğusu göndərilir
 
